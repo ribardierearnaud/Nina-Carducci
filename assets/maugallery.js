@@ -1,7 +1,11 @@
 (function($) {
+  // On crée un plugin jQuery appelé mauGallery
   $.fn.mauGallery = function(options) {
+    // On fusionne les options par défaut avec les options fournies
     var options = $.extend($.fn.mauGallery.defaults, options);
     var tagsCollection = [];
+    
+    // Pour chaque élément correspondant au sélecteur, on crée un conteneur de ligne et si lightbox est activé, on crée une LightBox
     return this.each(function() {
       $.fn.mauGallery.methods.createRowWrapper($(this));
       if (options.lightBox) {
@@ -11,8 +15,11 @@
           options.navigation
         );
       }
+
+      // on ajoute des gestionnaires d'événements
       $.fn.mauGallery.listeners(options);
 
+      // on parcourt les enfants de la galerie, on les organise et on y ajoute des tag correspondant à la catégorie de la photo 
       $(this)
         .children(".gallery-item")
         .each(function(index) {
@@ -29,6 +36,7 @@
           }
         });
 
+      // On crée le menu avec les catégories des photos
       if (options.showTags) {
         $.fn.mauGallery.methods.showItemTags(
           $(this),
@@ -37,9 +45,11 @@
         );
       }
 
+      // On ajoute une animation de fondu pour afficher la galerie
       $(this).fadeIn(500);
     });
   };
+  // les paramètres par défaut de la galerie (qui sont en réalité écrasés par ceux du fichier scripts.js)
   $.fn.mauGallery.defaults = {
     columns: 3,
     lightBox: true,
@@ -48,7 +58,9 @@
     tagsPosition: "bottom",
     navigation: true
   };
+  // on liste ici l'ensemble des event listeners
   $.fn.mauGallery.listeners = function(options) {
+    // Event listener pour un composant d'image
     $(".gallery-item").on("click", function() {
       if (options.lightBox && $(this).prop("tagName") === "IMG") {
         $.fn.mauGallery.methods.openLightBox($(this), options.lightboxId);
@@ -57,14 +69,19 @@
       }
     });
 
+    //Event listener pour le menu
     $(".gallery").on("click", ".nav-link", $.fn.mauGallery.methods.filterByTag);
+
+    //Event listener pour les boutons précédent et suivant
     $(".gallery").on("click", ".mg-prev", () =>
       $.fn.mauGallery.methods.prevImage(options.lightboxId)
     );
     $(".gallery").on("click", ".mg-next", () =>
-      $.fn.mauGallery.methods.nextImage(options.lightboxId)
-    );
+    $.fn.mauGallery.methods.nextImage(options.lightboxId)
+  );
   };
+
+  // Définition des méthodes
   $.fn.mauGallery.methods = {
     createRowWrapper(element) {
       if (
@@ -110,6 +127,7 @@
     },
     responsiveImageItem(element) {
       if (element.prop("tagName") === "IMG") {
+        // on ajoute une classe pour gérer le responsive via Bootstrap
         element.addClass("img-fluid");
       }
     },
@@ -153,10 +171,12 @@
           index = i ;
         }
       });
-      next =
-        imagesCollection[index] ||
-        imagesCollection[imagesCollection.length - 1];
+      // Correction de la méthode pour calculer l'index de la photo à afficher ensuite
+      index = (index - 1 + imagesCollection.length) % imagesCollection.length;
+      next = imagesCollection[index];
       $(".lightboxImage").attr("src", $(next).attr("src"));
+
+      
     },
     nextImage() {
       let activeImage = null;
@@ -192,7 +212,8 @@
           index = i;
         }
       });
-      next = imagesCollection[index] || imagesCollection[0];
+      index = (index + 1) % imagesCollection.length;
+      next = imagesCollection[index];
       $(".lightboxImage").attr("src", $(next).attr("src"));
     },
     createLightBox(gallery, lightboxId, navigation) {
