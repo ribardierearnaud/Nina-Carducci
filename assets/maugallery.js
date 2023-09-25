@@ -21,6 +21,7 @@
 
       // on parcourt les enfants de la galerie, on les organise et on y ajoute des tag correspondant à la catégorie de la photo 
       $(this)
+        .children(".gallery-item-picture")
         .children(".gallery-item")
         .each(function(index) {
           $.fn.mauGallery.methods.responsiveImageItem($(this));

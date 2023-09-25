@@ -5,6 +5,7 @@ body {
 * {
 	font-family: 'Inter';
 	font-style: normal;
+	margin: 0px 0px -16px 0px;
 }
 .top-header {
 	background-color: white;
@@ -40,6 +41,8 @@ body {
 
 .social-link img {
 	width: 20px;
+	margin-bottom: auto;
+
 }
 
 #about {
@@ -235,7 +238,7 @@ form textarea {
 	background-color: transparent;
 	border: solid 1px;
 	height: 5em;
-	line-height: 2.5em;
+	line-height: 1.5em;
 	font-size: 1.2em;
 	margin-bottom: 20px;
 }
@@ -263,7 +266,6 @@ input[type="submit"] {
 @media all and (max-width: 1000px) {
 	#about{
 		flex-direction: column;
-
 	}
 	.picture {
 		width: 50%;
