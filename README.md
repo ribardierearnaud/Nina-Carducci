@@ -12,3 +12,4 @@ Changes where done on:
  - index.html to optimize SEO, social networks integration and accessibility
  - style.css & style.min.css: clean and improve responsive feature
  - maugallery.js: bug correction
+ - pictures optimization
