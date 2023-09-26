@@ -596,7 +596,6 @@ progress {
 .img-fluid {
   max-width: 100%;
   height: auto;
-  max-height: 80vh;
 }
 
 .img-thumbnail {
@@ -3925,7 +3924,6 @@ textarea.form-control-lg {
   color: #0d6efd;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  margin-bottom: 16px;
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
@@ -5472,7 +5470,6 @@ textarea.form-control-lg {
   width: auto;
   margin: 0.5rem;
   pointer-events: none;
-  max-width: fit-content;
 }
 .modal.fade .modal-dialog {
   transition: transform 0.3s ease-out;
@@ -5560,7 +5557,6 @@ textarea.form-control-lg {
   position: relative;
   flex: 1 1 auto;
   padding: 1rem;
-  margin: 0px 0px 16px 0px;
 }
 
 .modal-footer {
@@ -5580,8 +5576,8 @@ textarea.form-control-lg {
 
 @media (min-width: 576px) {
   .modal-dialog {
+    max-width: 500px;
     margin: 1.75rem auto;
-    max-width: fit-content;
   }
 
   .modal-dialog-scrollable {
